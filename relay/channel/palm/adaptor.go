@@ -1,11 +1,11 @@
-package aiproxy
+package palm
 
 import (
 	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/songquanpeng/one-api/common"
 	"github.com/songquanpeng/one-api/relay/channel"
+	"github.com/songquanpeng/one-api/relay/channel/openai"
 	"github.com/songquanpeng/one-api/relay/model"
 	"github.com/songquanpeng/one-api/relay/util"
 	"io"
@@ -16,12 +16,12 @@ type Adaptor struct {
 }
 
 func (a *Adaptor) GetRequestURL(meta *util.RelayMeta) (string, error) {
-	return fmt.Sprintf("%s/api/library/ask", meta.BaseURL), nil
+	return fmt.Sprintf("%s/v1beta2/models/chat-bison-001:generateMessage", meta.BaseURL), nil
 }
 
 func (a *Adaptor) SetupRequestHeader(c *gin.Context, req *http.Request, meta *util.RelayMeta) error {
 	channel.SetupCommonRequestHeader(c, req, meta)
-	req.Header.Set("Authorization", "Bearer "+meta.APIKey)
+	req.Header.Set("x-goog-api-key", meta.APIKey)
 	return nil
 }
 
@@ -29,9 +29,7 @@ func (a *Adaptor) ConvertRequest(c *gin.Context, relayMode int, request *model.G
 	if request == nil {
 		return nil, errors.New("request is nil")
 	}
-	aiProxyLibraryRequest := ConvertRequest(*request)
-	aiProxyLibraryRequest.LibraryId = c.GetString(common.ConfigKeyLibraryID)
-	return aiProxyLibraryRequest, nil
+	return ConvertRequest(*request), nil
 }
 
 func (a *Adaptor) DoRequest(c *gin.Context, meta *util.RelayMeta, requestBody io.Reader) (*http.Response, error) {
@@ -40,9 +38,11 @@ func (a *Adaptor) DoRequest(c *gin.Context, meta *util.RelayMeta, requestBody io
 
 func (a *Adaptor) DoResponse(c *gin.Context, resp *http.Response, meta *util.RelayMeta) (usage *model.Usage, err *model.ErrorWithStatusCode) {
 	if meta.IsStream {
-		err, usage = StreamHandler(c, resp)
+		var responseText string
+		err, responseText = StreamHandler(c, resp)
+		usage = openai.ResponseText2Usage(responseText, meta.ActualModelName, meta.PromptTokens)
 	} else {
-		err, usage = Handler(c, resp)
+		err, usage = Handler(c, resp, meta.PromptTokens, meta.ActualModelName)
 	}
 	return
 }
@@ -52,5 +52,5 @@ func (a *Adaptor) GetModelList() []string {
 }
 
 func (a *Adaptor) GetChannelName() string {
-	return "aiproxy"
+	return "google palm"
 }

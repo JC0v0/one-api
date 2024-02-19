@@ -112,11 +112,21 @@ var ModelRatio = map[string]float64{
 	"qwen-max-longcontext":      1.4286, // ￥0.02 / 1k tokens
 	"text-embedding-v1":         0.05,   // ￥0.0007 / 1k tokens
 	"SparkDesk":                 1.2858, // ￥0.018 / 1k tokens
+	"SparkDesk-v1.1":            1.2858, // ￥0.018 / 1k tokens
+	"SparkDesk-v2.1":            1.2858, // ￥0.018 / 1k tokens
+	"SparkDesk-v3.1":            1.2858, // ￥0.018 / 1k tokens
+	"SparkDesk-v3.5":            1.2858, // ￥0.018 / 1k tokens
 	"360GPT_S2_V9":              0.8572, // ¥0.012 / 1k tokens
 	"embedding-bert-512-v1":     0.0715, // ¥0.001 / 1k tokens
 	"embedding_s1_v1":           0.0715, // ¥0.001 / 1k tokens
 	"semantic_similarity_s1_v1": 0.0715, // ¥0.001 / 1k tokens
 	"hunyuan":                   7.143,  // ¥0.1 / 1k tokens  // https://cloud.tencent.com/document/product/1729/97731#e0e6be58-60c8-469f-bdeb-6c264ce3b4d0
+	"ChatStd":                   0.01 * RMB,
+	"ChatPro":                   0.1 * RMB,
+	// https://platform.moonshot.cn/pricing
+	"moonshot-v1-8k":   0.012 * RMB,
+	"moonshot-v1-32k":  0.024 * RMB,
+	"moonshot-v1-128k": 0.06 * RMB,
 }
 
 func ModelRatio2JSONString() string {

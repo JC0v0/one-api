@@ -13,7 +13,13 @@ import (
 	"net/http"
 )
 
+// https://help.aliyun.com/zh/dashscope/developer-reference/api-details
+
 type Adaptor struct {
+}
+
+func (a *Adaptor) Init(meta *util.RelayMeta) {
+
 }
 
 func (a *Adaptor) GetRequestURL(meta *util.RelayMeta) (string, error) {

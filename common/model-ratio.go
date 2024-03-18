@@ -72,14 +72,15 @@ var ModelRatio = map[string]float64{
 	"claude-3-sonnet-20240229": 3.0 / 1000 * USD,
 	"claude-3-opus-20240229":   15.0 / 1000 * USD,
 	// https://cloud.baidu.com/doc/WENXINWORKSHOP/s/hlrk4akp7
-	"ERNIE-Bot":         0.8572,     // ￥0.012 / 1k tokens
-	"ERNIE-Bot-turbo":   0.5715,     // ￥0.008 / 1k tokens
-	"ERNIE-Bot-4":       0.12 * RMB, // ￥0.12 / 1k tokens
-	"ERNIE-Bot-8k":      0.024 * RMB,
-	"Embedding-V1":      0.1429, // ￥0.002 / 1k tokens
-	"bge-large-zh":      0.002 * RMB,
-	"bge-large-en":      0.002 * RMB,
-	"bge-large-8k":      0.002 * RMB,
+	"ERNIE-Bot":       0.8572,     // ￥0.012 / 1k tokens
+	"ERNIE-Bot-turbo": 0.5715,     // ￥0.008 / 1k tokens
+	"ERNIE-Bot-4":     0.12 * RMB, // ￥0.12 / 1k tokens
+	"ERNIE-Bot-8k":    0.024 * RMB,
+	"Embedding-V1":    0.1429, // ￥0.002 / 1k tokens
+	"bge-large-zh":    0.002 * RMB,
+	"bge-large-en":    0.002 * RMB,
+	"bge-large-8k":    0.002 * RMB,
+	// https://ai.google.dev/pricing
 	"PaLM-2":            1,
 	"gemini-pro":        1, // $0.00025 / 1k characters -> $0.001 / 1k tokens
 	"gemini-pro-vision": 1, // $0.00025 / 1k characters -> $0.001 / 1k tokens
@@ -133,9 +134,9 @@ var ModelRatio = map[string]float64{
 	"mixtral-8x7b-32768": 0.27 / 1000 * USD,
 	"gemma-7b-it":        0.1 / 1000 * USD,
 	// https://platform.lingyiwanwu.com/docs#-计费单元
-	"yi-34b-chat-0205": 2.5 / 1000000 * RMB,
-	"yi-34b-chat-200k": 12.0 / 1000000 * RMB,
-	"yi-vl-plus":       6.0 / 1000000 * RMB,
+	"yi-34b-chat-0205": 2.5 / 1000 * RMB,
+	"yi-34b-chat-200k": 12.0 / 1000 * RMB,
+	"yi-vl-plus":       6.0 / 1000 * RMB,
 }
 
 var CompletionRatio = map[string]float64{}

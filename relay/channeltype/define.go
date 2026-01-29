@@ -47,5 +47,11 @@ const (
 	Proxy
 	SiliconFlow
 	XAI
+	Replicate
+	BaiduV2
+	XunfeiV2
+	AliBailian
+	OpenAICompatible
+	GeminiOpenAICompatible
 	Dummy
 )
